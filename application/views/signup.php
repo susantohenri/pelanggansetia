@@ -2,8 +2,8 @@
   <input type="hidden" name="token" value="<?= $token ?>">
 
   <!-- Nama Toko -->
-  <label class="block mb-2 text-sm font-medium text-gray-700"><?= $label_nama ?></label>
-  <input required name="nama" type="text" placeholder="<?= $label_nama ?>" value="<?= $nama ?>"
+  <label class="block mb-2 text-sm font-medium text-gray-700">Nama Toko</label>
+  <input required name="nama" type="text" placeholder="Nama Toko" value="<?= $nama ?>"
     class="w-full border rounded px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
 
   <!-- Nomor HP -->

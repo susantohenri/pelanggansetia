@@ -12,15 +12,16 @@ class Migration_user extends CI_Migration
         `id` INT(11) UNIQUE NOT NULL AUTO_INCREMENT,
         `username` varchar(255) NOT NULL,
         `password` varchar(32) NOT NULL,
-        `role` ENUM('admin', 'merchant', 'customer') DEFAULT 'merchant',
-        `merchant` INT(11) NOT NULL DEFAULT 0,
+        `role` ENUM('admin', 'penjual', 'pembeli') DEFAULT 'penjual',
+        `nama` varchar(255) NOT NULL,
+        `poin` float NOT NULL DEFAULT 0,
+        `saldo` float NOT NULL DEFAULT 0,
         `createdAt` datetime DEFAULT NULL,
         `updatedAt` datetime DEFAULT NULL,
         `deletedAt` datetime DEFAULT NULL,
-        `nama` varchar(255) NOT NULL,
-        `balance` float NOT NULL DEFAULT 0,
         PRIMARY KEY (`id`),
-        UNIQUE KEY `unique_username_merchant` (`username`, `merchant`)
+        INDEX `idx_username` (`username`),
+        INDEX `idx_nama` (`nama`)
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8
     ");
 

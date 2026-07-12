@@ -33,7 +33,7 @@
     </script>
   </div>
 
-  <a href="<?= site_url('Authenticated/addcustomer') ?>"
+  <a href="<?= site_url('Penjual/addcustomer') ?>"
     class="mt-1 w-full flex items-center justify-center gap-2 bg-yellow-500 hover:bg-yellow-700 text-white py-2 px-4 rounded">
     <span class="material-icons">person_add</span>
     <span>Tambah Pelanggan</span>
