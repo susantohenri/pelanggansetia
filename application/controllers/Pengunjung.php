@@ -19,7 +19,7 @@ class Pengunjung extends MY_Controller
         'label' => 'Masuk',
       ],
       [
-        'href' => site_url('Pengunjung/signup'),
+        'href' => site_url('Pengunjung/signuppenjual'),
         'icon' => 'person_add',
         'label' => 'Daftar',
       ],
@@ -33,7 +33,7 @@ class Pengunjung extends MY_Controller
     ]);
   }
 
-  function signup()
+  function signuppenjual()
   {
     if ($post = $this->validatesubmission()) {
       $this->load->model('Users');
@@ -51,12 +51,36 @@ class Pengunjung extends MY_Controller
       'page_title' => 'Register',
       'header' => 'Pendaftaran',
       'active_menu' => 2,
-      'page' => 'signup.php',
+      'page' => 'signup-penjual.php',
       'token' => $this->generatetoken(),
       'error' => isset($error) ? $error : '',
       'success' => isset($success) ? $success : '',
       'nama' => !!$post ? $post['nama'] : '',
       'username' => !!$post ? $post['username'] : '',
+    ]);
+  }
+
+  function signuppembeli()
+  {
+    if ($post = $this->validatesubmission()) {
+      $this->load->model('Users');
+      $error = $this->Users->signuppembeli([
+        'nama' => $post['nama'],
+      ]);
+      if (!$error) {
+        redirect(site_url('Pembeli'));
+      }
+    }
+
+    $this->loadview([
+      'page_title' => 'Register',
+      'header' => 'Pendaftaran',
+      'active_menu' => 2,
+      'page' => 'signup-pembeli.php',
+      'token' => $this->generatetoken(),
+      'error' => isset($error) ? $error : '',
+      'success' => isset($success) ? $success : '',
+      'nama' => !!$post ? $post['nama'] : '',
     ]);
   }
 
@@ -81,11 +105,6 @@ class Pengunjung extends MY_Controller
 
   function scanqrpenjual($md5idPenjual = null)
   {
-    if ($this->validatesubmission()) {
-      $this->load->model('Users');
-      $this->Users->signuppembeli();
-    }
-
     $sudahlogin = $this->session->userdata('id');
     if ($sudahlogin) redirect(site_url('Pembeli'));
     else $this->loadview([
@@ -93,7 +112,7 @@ class Pengunjung extends MY_Controller
       'header' => 'Selamat Datang',
       'active_menu' => 0,
       'token' => $this->generatetoken(),
-      'page' => 'punya-akun-kah.php',
+      'page' => 'scanqr-penjual.php',
     ]);
   }
 }

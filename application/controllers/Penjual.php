@@ -61,9 +61,84 @@ class Penjual extends MY_Controller
     ]);
   }
 
-  function Logout()
+  function logout()
   {
     $this->session->sess_destroy();
     redirect(base_url());
+  }
+
+  function scanqrpembeli($md5pembeli)
+  {
+    $this->load->model('Users');
+    $pembeli = $this->Users->findByMd5Id($md5pembeli);
+    if (!$pembeli) $error = 'Pelanggan tidak ditemukan';
+
+    if ($post = $this->validatesubmission()) {
+      $this->load->model('Poins');
+      $this->Poins->transaksi([
+        'pembeli' => $pembeli['id'],
+        'nilai' => $post['nilai'],
+      ]);
+
+      redirect(site_url("Penjual/redeem/{$md5pembeli}"));
+    }
+
+    $this->loadview([
+      'page_title' => 'Transaksi',
+      'header' => $this->session->userdata('nama'),
+      'page' => 'scanqr-pembeli.php',
+      'token' => $this->generatetoken(),
+      'error' => isset($error) ? $error : '',
+      'success' => isset($success) ? $success : '',
+      'pembeli' => $pembeli
+    ]);
+  }
+
+  function redeem($md5pembeli)
+  {
+    $this->load->model('Users');
+    $pembeli = $this->Users->findByMd5Id($md5pembeli);
+    if (!$pembeli) $error = 'Pelanggan tidak ditemukan';
+
+    if ($post = $this->validatesubmission()) {
+      $this->load->model('Poins');
+      $error = $this->Poins->redeem([
+        'pembeli' => $pembeli['id'],
+        'nilai' => $post['nilai'],
+      ]);
+
+      if (!$error) redirect(site_url());
+    }
+
+    $this->loadview([
+      'page_title' => 'Transaksi',
+      'header' => $this->session->userdata('nama'),
+      'page' => 'redeem.php',
+      'token' => $this->generatetoken(),
+      'error' => isset($error) ? $error : '',
+      'success' => isset($success) ? $success : '',
+      'pembeli' => $pembeli
+    ]);
+  }
+
+  function daftarkanpelanggan()
+  {
+    if ($post = $this->validatesubmission()) {
+      $this->load->model('Users');
+      $id = $this->Users->create([
+        'nama' => $post['nama'],
+      ]);
+      redirect(site_url('Penjual/scanqrpembeli/' . md5($id)));
+    }
+
+    $this->loadview([
+      'page_title' => 'Register',
+      'header' => 'Pelanggan Baru',
+      'page' => 'signup-pembeli.php',
+      'token' => $this->generatetoken(),
+      'error' => isset($error) ? $error : '',
+      'success' => isset($success) ? $success : '',
+      'nama' => !!$post ? $post['nama'] : '',
+    ]);
   }
 }

@@ -8,7 +8,7 @@
     <p class="text-stone-700 text-base leading-7 mb-4">Catat transaksi pelanggan, tampilkan QR kupon digital, lalu
       lihat siapa yang paling sering balik lagi.</p>
     <div class="grid gap-3">
-      <a href="<?= site_url('Pengunjung/signup') ?>"
+      <a href="<?= site_url('Pengunjung/signuppenjual') ?>"
         class="block w-full rounded-2xl bg-amber-500 text-white text-lg font-bold text-center py-4 hover:bg-amber-600">Daftar</a>
       <a href="<?= site_url('Pengunjung/signin') ?>"
         class="block w-full rounded-2xl border-2 border-stone-300 bg-white text-stone-900 text-lg font-bold text-center py-4 hover:bg-stone-50">Masuk</a>

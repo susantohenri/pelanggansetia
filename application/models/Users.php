@@ -26,11 +26,11 @@ class Users extends MY_Model
     }
   }
 
-  function signuppembeli()
+  function signuppembeli($pembeli)
   {
-    $id = $this->create([
+    $id = $this->create(array_merge($pembeli, [
       'role' => 'pembeli'
-    ]);
+    ]));
     $user = $this->findOne($id);
     $this->session->set_userdata($user);
 

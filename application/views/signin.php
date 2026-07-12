@@ -18,8 +18,9 @@
   <?php endif; ?>
 
   <!-- Tombol Login -->
-  <button type="submit" class="w-full bg-yellow-500 text-white py-2 rounded hover:bg-yellow-600">
-    Masuk
+  <button type="submit" class="w-full bg-yellow-500 text-white py-2 rounded hover:bg-yellow-600 flex items-center justify-center gap-2">
+    <span class="material-icons text-base">login</span>
+    <span>Masuk</span>
   </button>
   <div class="w-full text-right pr-2">
     <a href="https://wa.me/6281901088918?text=halo%20admin%20pelanggansetia.com" target="_blank"

@@ -46,7 +46,7 @@ class Pembeli extends MY_Controller
       'success' => isset($success) ? $success : '',
       'nama' => isset($post['nama']) ? $post['nama'] : $user['nama'],
       'username' => isset($post['username']) ? $post['username'] : $user['username'],
-      'qr' => site_url('Penjual/addpoint/' . md5($this->session->userdata('id')))
+      'qr' => site_url('Penjual/scanqrpembeli/' . md5($this->session->userdata('id')))
     ]);
   }
 
