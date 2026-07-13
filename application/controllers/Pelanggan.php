@@ -2,7 +2,7 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Pembeli extends MY_Controller
+class Pelanggan extends MY_Controller
 {
   public function __construct()
   {
@@ -15,14 +15,14 @@ class Pembeli extends MY_Controller
         'label' => 'Home',
       ],
       [
-        'href' => site_url('Pembeli/logout'),
+        'href' => site_url('Pelanggan/logout'),
         'icon' => 'logout',
         'label' => 'Keluar',
       ],
     ];
 
     $role = $this->session->userdata('role');
-    if (!$role || 'pembeli' != $role) {
+    if (!$role || 'pelanggan' != $role) {
       redirect(site_url('Pengunjung'));
     }
   }
@@ -46,7 +46,7 @@ class Pembeli extends MY_Controller
       'success' => isset($success) ? $success : '',
       'nama' => isset($post['nama']) ? $post['nama'] : $user['nama'],
       'username' => isset($post['username']) ? $post['username'] : $user['username'],
-      'qr' => site_url('Penjual/scanqrpembeli/' . md5($this->session->userdata('id')))
+      'qr' => site_url('Penjual/scanqrpelanggan/' . md5($this->session->userdata('id')))
     ]);
   }
 

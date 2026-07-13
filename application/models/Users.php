@@ -26,10 +26,10 @@ class Users extends MY_Model
     }
   }
 
-  function signuppembeli($pembeli)
+  function signuppelanggan($pelanggan)
   {
-    $id = $this->create(array_merge($pembeli, [
-      'role' => 'pembeli'
+    $id = $this->create(array_merge($pelanggan, [
+      'role' => 'pelanggan'
     ]));
     $user = $this->findOne($id);
     $this->session->set_userdata($user);
@@ -44,6 +44,12 @@ class Users extends MY_Model
     if (!$user) return 'Pengguna tidak ditemukan';
     else if ($user['password'] !== md5($password)) return 'Password salah';
     else {
+      if ('penjual' == $user['role']) {
+        $this->load->model(['Poins', 'Pelanggans']);
+        $this->Poins->retention($user['id']);
+        $this->Poins->redemption($user['id']);
+        $this->Pelanggans->pelanggansetia($user['id']);
+      }
       $this->session->set_userdata($user);
       return false;
     }

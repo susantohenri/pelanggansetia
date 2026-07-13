@@ -60,15 +60,15 @@ class Pengunjung extends MY_Controller
     ]);
   }
 
-  function signuppembeli()
+  function signuppelanggan()
   {
     if ($post = $this->validatesubmission()) {
       $this->load->model('Users');
-      $error = $this->Users->signuppembeli([
+      $error = $this->Users->signuppelanggan([
         'nama' => $post['nama'],
       ]);
       if (!$error) {
-        redirect(site_url('Pembeli'));
+        redirect(site_url('Pelanggan'));
       }
     }
 
@@ -76,7 +76,7 @@ class Pengunjung extends MY_Controller
       'page_title' => 'Register',
       'header' => 'Pendaftaran',
       'active_menu' => 2,
-      'page' => 'signup-pembeli.php',
+      'page' => 'signup-pelanggan.php',
       'token' => $this->generatetoken(),
       'error' => isset($error) ? $error : '',
       'success' => isset($success) ? $success : '',
@@ -89,7 +89,7 @@ class Pengunjung extends MY_Controller
     if ($post = $this->validatesubmission()) {
       $this->load->model('Users');
       $error = $this->Users->login($post['username'], $post['password']);
-      if (!$error) redirect(site_url($this->session->userdata('role')));
+      if (!$error) redirect(site_url(ucfirst($this->session->userdata('role'))));
     }
 
     $this->loadview([
@@ -106,7 +106,7 @@ class Pengunjung extends MY_Controller
   function scanqrpenjual($md5idPenjual = null)
   {
     $sudahlogin = $this->session->userdata('id');
-    if ($sudahlogin) redirect(site_url('Pembeli'));
+    if ($sudahlogin) redirect(site_url('Pelanggan'));
     else $this->loadview([
       'page_title' => 'Scan QR',
       'header' => 'Selamat Datang',

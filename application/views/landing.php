@@ -29,7 +29,7 @@
       <span class="material-icons">photo_camera</span>
     </div>
     <h3 class="text-lg font-extrabold mb-1">Pelanggan simpan QR sendiri</h3>
-    <p class="text-stone-700 leading-7">Pembeli tinggal scan QR penjual untuk dapetin QR pelanggan, lalu simpan di galeri atau login.</p>
+    <p class="text-stone-700 leading-7">Pelanggan tinggal scan QR penjual untuk dapetin QR pelanggan, lalu simpan di galeri atau login.</p>
   </article>
 
   <article class="bg-white rounded-2xl shadow-sm border border-stone-200 p-4">

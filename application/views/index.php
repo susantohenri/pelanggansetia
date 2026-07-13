@@ -13,7 +13,7 @@
   <!-- Header -->
   <header class="fixed top-0 left-0 w-full bg-white shadow-md p-4 text-center z-10">
     <a href="<?= base_url() ?>">
-      <h1 class="text-lg font-bold"><?= $header ?></h1>
+      <h1 class="text-2xl font-bold"><?= $header ?></h1>
     </a>
   </header>
 

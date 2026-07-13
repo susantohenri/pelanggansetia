@@ -1,7 +1,9 @@
-<div class="flex flex-col gap-3">
+<div class="flex flex-col gap-3" id="kartuPelanggan">
   <div class="bg-white shadow-md rounded-lg p-6 w-80">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <h1 class="text-sm mb-1">pelanggansetia.com</h1>
     <div id="qrcode"></div>
+    <h1 class="text-sm mt-1">tunjukkan QR code ini kepada penjual</h1>
     <script type="text/javascript">
       new QRCode(document.getElementById("qrcode"), {
         text: "<?= $qr ?>",
@@ -45,10 +47,31 @@
       <span class="material-icons text-base">save</span>
       <span>Perbaharui Data</span>
     </button>
-    <a href="<?= site_url('Penjual/logout') ?>"
+    <a id="downloadQR"
       class="mt-3 w-full block text-center bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded flex items-center justify-center gap-2">
       <span class="material-icons text-base">download</span>
       <span>Download QR</span>
     </a>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+      document.getElementById("downloadQR").addEventListener("click", function() {
+
+        html2canvas(document.getElementById("kartuPelanggan"), {
+          scale: 3,
+          backgroundColor: "#ffffff",
+          useCORS: true
+        }).then(function(canvas) {
+
+          const link = document.createElement("a");
+          const nama = document.querySelector('input[name="nama"]').value || "pelanggan";
+
+          link.download = nama.replace(/\s+/g, "-") + ".png";
+          link.href = canvas.toDataURL("image/png");
+          link.click();
+
+        });
+
+      });
+    </script>
   </form>
 </div>

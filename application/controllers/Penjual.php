@@ -15,6 +15,11 @@ class Penjual extends MY_Controller
         'label' => 'Home',
       ],
       [
+        'href' => site_url('Penjual/pelanggan'),
+        'icon' => 'group',
+        'label' => 'Pelanggan',
+      ],
+      [
         'href' => site_url('Penjual/profile'),
         'icon' => 'person',
         'label' => 'Profil',
@@ -50,7 +55,7 @@ class Penjual extends MY_Controller
     $this->loadview([
       'page_title' => 'Profile',
       'header' => $this->session->userdata('nama'),
-      'active_menu' => 1,
+      'active_menu' => 2,
       'page' => 'profile-penjual.php',
       'token' => $this->generatetoken(),
       'error' => isset($error) ? $error : '',
@@ -67,48 +72,70 @@ class Penjual extends MY_Controller
     redirect(base_url());
   }
 
-  function scanqrpembeli($md5pembeli)
+  function scanqrpelanggan($md5pelanggan)
   {
-    $this->load->model('Users');
-    $pembeli = $this->Users->findByMd5Id($md5pembeli);
-    if (!$pembeli) $error = 'Pelanggan tidak ditemukan';
+    $this->load->model(['Users', 'Pelanggans']);
+    $pelanggan = $this->Users->findByMd5Id($md5pelanggan);
+    if (!$pelanggan) $error = 'Pelanggan tidak ditemukan';
 
     if ($post = $this->validatesubmission()) {
       $this->load->model('Poins');
-      $this->Poins->transaksi([
-        'pembeli' => $pembeli['id'],
+      $error = $this->Poins->transaksi([
+        'pelanggan' => $pelanggan['id'],
         'nilai' => $post['nilai'],
       ]);
 
-      redirect(site_url("Penjual/redeem/{$md5pembeli}"));
+      if (!$error) redirect(site_url("Penjual/redeem/{$md5pelanggan}"));
     }
+
+    $stats = $this->Pelanggans->findOne([
+      'pelanggan' => $pelanggan['id'],
+      'penjual' => $this->session->userdata('id')
+    ]);
+    $stats = !!$stats ? $stats : [
+      'poin' => 0,
+      'earn' => 0,
+      'redeem' => 0
+    ];
+    $pelanggan = array_merge($pelanggan, $stats);
 
     $this->loadview([
       'page_title' => 'Transaksi',
       'header' => $this->session->userdata('nama'),
-      'page' => 'scanqr-pembeli.php',
+      'page' => 'scanqr-pelanggan.php',
       'token' => $this->generatetoken(),
       'error' => isset($error) ? $error : '',
       'success' => isset($success) ? $success : '',
-      'pembeli' => $pembeli
+      'pelanggan' => $pelanggan
     ]);
   }
 
-  function redeem($md5pembeli)
+  function redeem($md5pelanggan)
   {
-    $this->load->model('Users');
-    $pembeli = $this->Users->findByMd5Id($md5pembeli);
-    if (!$pembeli) $error = 'Pelanggan tidak ditemukan';
+    $this->load->model(['Users', 'Pelanggans']);
+    $pelanggan = $this->Users->findByMd5Id($md5pelanggan);
+    if (!$pelanggan) $error = 'Pelanggan tidak ditemukan';
 
     if ($post = $this->validatesubmission()) {
       $this->load->model('Poins');
       $error = $this->Poins->redeem([
-        'pembeli' => $pembeli['id'],
+        'pelanggan' => $pelanggan['id'],
         'nilai' => $post['nilai'],
       ]);
 
       if (!$error) redirect(site_url());
     }
+
+    $stats = $this->Pelanggans->findOne([
+      'pelanggan' => $pelanggan['id'],
+      'penjual' => $this->session->userdata('id')
+    ]);
+    $stats = !!$stats ? $stats : [
+      'poin' => 0,
+      'earn' => 0,
+      'redeem' => 0
+    ];
+    $pelanggan = array_merge($pelanggan, $stats);
 
     $this->loadview([
       'page_title' => 'Transaksi',
@@ -117,7 +144,7 @@ class Penjual extends MY_Controller
       'token' => $this->generatetoken(),
       'error' => isset($error) ? $error : '',
       'success' => isset($success) ? $success : '',
-      'pembeli' => $pembeli
+      'pelanggan' => $pelanggan
     ]);
   }
 
@@ -127,18 +154,57 @@ class Penjual extends MY_Controller
       $this->load->model('Users');
       $id = $this->Users->create([
         'nama' => $post['nama'],
+        'role' => 'pelanggan'
       ]);
-      redirect(site_url('Penjual/scanqrpembeli/' . md5($id)));
+      redirect(site_url('Penjual/scanqrpelanggan/' . md5($id)));
     }
 
     $this->loadview([
       'page_title' => 'Register',
       'header' => 'Pelanggan Baru',
-      'page' => 'signup-pembeli.php',
+      'page' => 'signup-pelanggan.php',
       'token' => $this->generatetoken(),
       'error' => isset($error) ? $error : '',
       'success' => isset($success) ? $success : '',
       'nama' => !!$post ? $post['nama'] : '',
+    ]);
+  }
+
+  function pelanggan()
+  {
+    $this->load->model('Pelanggans');
+    $pelanggans = $this->Pelanggans->daftarpelanggan();
+    $this->loadview([
+      'page_title' => 'Pelanggan',
+      'header' => $this->session->userdata('nama'),
+      'active_menu' => 1,
+      'page' => "pelanggan.php",
+      'pelanggans' => $pelanggans
+    ]);
+  }
+
+  function pelanggandetail($md5pelanggan)
+  {
+    $this->load->model(['Users', 'Pelanggans']);
+    $pelanggan = $this->Users->findByMd5Id($md5pelanggan);
+    $stats = $this->Pelanggans->findOne([
+      'pelanggan' => $pelanggan['id'],
+      'penjual' => $this->session->userdata('id')
+    ]);
+    $stats = !!$stats ? $stats : [
+      'poin' => 0,
+      'earn' => 0,
+      'redeem' => 0
+    ];
+    $pelanggan = array_merge($pelanggan, $stats);
+    $this->loadview([
+      'page_title' => 'Pelanggan',
+      'header' => $this->session->userdata('nama'),
+      'active_menu' => 1,
+      'page' => "pelanggan-detail.php",
+      'pelanggan' => $pelanggan,
+      'md5pelanggan' => $md5pelanggan,
+      'qr' => site_url('Penjual/scanqrpelanggan/' . md5($this->session->userdata('id')))
     ]);
   }
 }
