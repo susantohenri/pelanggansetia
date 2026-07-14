@@ -1,9 +1,9 @@
 <div class="flex flex-col gap-3" id="kartuPelanggan">
   <div class="bg-white shadow-md rounded-lg p-6 w-80">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <h1 class="text-sm mb-1">pelanggansetia.com</h1>
+    <h1 class="text-sm mb-1 text-blue-600 text-center">pelanggansetia.com</h1>
     <div id="qrcode"></div>
-    <h1 class="text-sm mt-1">tunjukkan QR code ini kepada penjual</h1>
+    <h1 class="text-sm mt-1 text-blue-600">Tunjukkan QR code ini kepada penjual</h1>
     <script type="text/javascript">
       new QRCode(document.getElementById("qrcode"), {
         text: "<?= $qr ?>",

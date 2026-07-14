@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pelanggansetia.com - <?= $page_title ?></title>
+  <link rel="manifest" href="<?= base_url('manifest.json') ?>">
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -34,6 +35,15 @@
 
   <!-- Google Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script type="text/javascript">
+    if ('service-worker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('<?= base_url('service-worker.js') ?>')
+          .then(reg => console.log('Service Worker terdaftar!', reg))
+          .catch(err => console.error('Gagal daftar Service Worker:', err));
+      });
+    }
+  </script>
 </body>
 
 </html>

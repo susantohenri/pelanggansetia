@@ -50,7 +50,7 @@
 
     <div id="result"
       class="mt-4 p-3 bg-white rounded text-center font-semibold">
-      Arahkan kamera ke QR Code
+      arahkan kamera ke QR code pelanggan
     </div>
 
     <script type="module">

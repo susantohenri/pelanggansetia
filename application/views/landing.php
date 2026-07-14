@@ -9,9 +9,9 @@
       lihat siapa yang paling sering balik lagi.</p>
     <div class="grid gap-3">
       <a href="<?= site_url('Pengunjung/signuppenjual') ?>"
-        class="block w-full rounded-2xl bg-amber-500 text-white text-lg font-bold text-center py-4 hover:bg-amber-600">Daftar</a>
+        class="block w-full rounded-2xl bg-amber-500 text-white text-lg font-bold text-center py-4 hover:bg-amber-600">Coba Gratis</a>
       <a href="<?= site_url('Pengunjung/signin') ?>"
-        class="block w-full rounded-2xl border-2 border-stone-300 bg-white text-stone-900 text-lg font-bold text-center py-4 hover:bg-stone-50">Masuk</a>
+        class="block w-full rounded-2xl border-2 border-stone-300 bg-white text-stone-900 text-lg font-bold text-center py-4 hover:bg-stone-50">Pakai Sekarang</a>
     </div>
   </div>
 

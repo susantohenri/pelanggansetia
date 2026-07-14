@@ -10,7 +10,7 @@
       <input
         type="text"
         id="search"
-        placeholder="Cari pelanggan..."
+        placeholder="Cari Nama / No. HP pelanggan..."
         class="w-full border rounded-lg pl-10 pr-3 py-2 focus:ring-2 focus:ring-yellow-500 focus:outline-none">
     </div>
   </div>

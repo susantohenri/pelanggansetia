@@ -97,7 +97,7 @@ class Penjual extends MY_Controller
       'earn' => 0,
       'redeem' => 0
     ];
-    $pelanggan = array_merge($pelanggan, $stats);
+    $pelanggan = array_merge($stats, $pelanggan);
 
     $this->loadview([
       'page_title' => 'Transaksi',
@@ -135,7 +135,7 @@ class Penjual extends MY_Controller
       'earn' => 0,
       'redeem' => 0
     ];
-    $pelanggan = array_merge($pelanggan, $stats);
+    $pelanggan = array_merge($stats, $pelanggan);
 
     $this->loadview([
       'page_title' => 'Transaksi',
@@ -196,7 +196,7 @@ class Penjual extends MY_Controller
       'earn' => 0,
       'redeem' => 0
     ];
-    $pelanggan = array_merge($pelanggan, $stats);
+    $pelanggan = array_merge($stats, $pelanggan);
     $this->loadview([
       'page_title' => 'Pelanggan',
       'header' => $this->session->userdata('nama'),
@@ -204,7 +204,7 @@ class Penjual extends MY_Controller
       'page' => "pelanggan-detail.php",
       'pelanggan' => $pelanggan,
       'md5pelanggan' => $md5pelanggan,
-      'qr' => site_url('Penjual/scanqrpelanggan/' . md5($this->session->userdata('id')))
+      'qr' => site_url('Penjual/scanqrpelanggan/' . md5($pelanggan['id']))
     ]);
   }
 }
