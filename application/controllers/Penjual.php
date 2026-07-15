@@ -106,7 +106,8 @@ class Penjual extends MY_Controller
       'token' => $this->generatetoken(),
       'error' => isset($error) ? $error : '',
       'success' => isset($success) ? $success : '',
-      'pelanggan' => $pelanggan
+      'pelanggan' => $pelanggan,
+      'qr' => site_url('Penjual/scanqrpelanggan/' . md5($pelanggan['id']))
     ]);
   }
 
@@ -161,7 +162,7 @@ class Penjual extends MY_Controller
 
     $this->loadview([
       'page_title' => 'Register',
-      'header' => 'Pelanggan Baru',
+      'header' => $this->session->userdata('nama'),
       'page' => 'signup-pelanggan.php',
       'token' => $this->generatetoken(),
       'error' => isset($error) ? $error : '',

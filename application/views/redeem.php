@@ -1,9 +1,9 @@
 <div class="flex flex-col gap-3">
   <div class="bg-white shadow-md rounded-lg p-6 w-80">
-    <h1 class="text-center text-xl border-b mb-3 pb-2">Kasih Hadiah</h1>
+    <h1 class="text-center text-xl border-b mb-3 pb-2">Tukar Poin dg Hadiah</h1>
     <h1><b>Pelanggan: </b><?= $pelanggan['nama'] ?></h1>
-    <h1><b>Hadiah: </b><?= $pelanggan['redeem'] ?>x</h1>
-    <h1><b>Poin: </b><?= $pelanggan['poin'] ?></h1>
+    <h1><b>Pernah dapet hadiah: </b><?= $pelanggan['redeem'] ?>x</h1>
+    <h1><b>Poin sekarang: </b><?= $pelanggan['poin'] ?></h1>
   </div>
   <form class="bg-white shadow-md rounded-lg p-6 w-80" method="POST" action="">
     <input type="hidden" name="token" value="<?= $token ?>">
@@ -28,12 +28,12 @@
 
     <button type="submit" class="w-full bg-yellow-500 text-white py-2 rounded hover:bg-yellow-600 flex items-center justify-center gap-2">
       <span class="material-icons text-base">card_giftcard</span>
-      <span>Beri Hadiah</span>
+      <span>Berikan Hadiah</span>
     </button>
     <a href="<?= site_url() ?>"
       class="mt-3 w-full block text-center bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded flex items-center justify-center gap-2">
       <span class="material-icons text-base">close</span>
-      <span>Belum</span>
+      <span>Tidak</span>
     </a>
   </form>
 </div>
