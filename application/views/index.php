@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pelanggansetia.com - <?= $page_title ?></title>
   <link rel="manifest" href="<?= base_url('manifest.json') ?>">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="<?= base_url('style.css') ?>" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body class="bg-gray-100 flex flex-col h-screen">
@@ -33,8 +34,6 @@
     <?php endforeach; ?>
   </nav>
 
-  <!-- Google Material Icons -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script type="text/javascript">
     if ('service-worker' in navigator) {
       window.addEventListener('load', () => {
