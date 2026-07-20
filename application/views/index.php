@@ -7,7 +7,6 @@
   <title>Pelanggansetia.com - <?= $page_title ?></title>
   <link rel="manifest" href="<?= base_url('manifest.json') ?>">
   <link href="<?= base_url('style.css') ?>" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body class="bg-gray-100 flex flex-col h-screen">
@@ -28,7 +27,7 @@
   <nav class="fixed bottom-0 left-0 w-full bg-white border-t shadow-md flex justify-around py-2 z-10">
     <?php foreach ($menu as $index => $item): ?>
       <a href="<?= $item['href'] ?>" class="flex flex-col items-center text-<?= $index === $active_menu ? 'yellow' : 'gray' ?>-500">
-        <span class="material-icons"><?= $item['icon'] ?></span>
+        <?= $item['icon'] ?>
         <span class="text-xs"><?= $item['label'] ?></span>
       </a>
     <?php endforeach; ?>

@@ -19,8 +19,12 @@
     class="w-full border rounded px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
 
   <!-- Tombol Registrasi -->
-  <button type="submit" class="w-full bg-yellow-500 text-white py-2 rounded hover:bg-yellow-600 flex items-center justify-center gap-2">
-    <span class="material-icons text-base">person_add</span>
+  <button type="submit"
+    class="w-full bg-yellow-500 text-white py-2 rounded hover:bg-yellow-600 flex items-center justify-center gap-2">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 12a4 4 0 100-8 4 4 0 000 8zm0 2c-4.418 0-8 1.79-8 4v2h16v-2c0-2.21-3.582-4-8-4z" />
+      <path stroke-linecap="round" stroke-linejoin="round" d="M19 8v6M16 11h6" />
+    </svg>
     <span>Daftar</span>
   </button>
 </form>

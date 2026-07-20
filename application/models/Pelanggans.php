@@ -89,6 +89,6 @@ class Pelanggans extends MY_Model
       return 'Kemarin, Jam ' . date('H:i', $time);
     }
 
-    return date('d M Y, Jam H:i', $time);
+    return date('d M Y, \J\a\m H:i', $time);
   }
 }
